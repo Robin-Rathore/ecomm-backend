@@ -6,8 +6,7 @@ const { updateProduct } = require("./productController");
 const { Order } = require("../model/orderModel");
 exports.registerController = async (req, res) => {
   try {
-    const { email, name, password, address, phone, answer, shipping, role } =
-      req.body;
+    const { email, name, password, address, phone, role } = req.body;
     if (!email) {
       return res.send({
         message: "Enter Email",
@@ -33,12 +32,6 @@ exports.registerController = async (req, res) => {
         message: "Enter Address",
       });
     }
-    if (!answer) {
-      return res.send({
-        message: "Enter Answer",
-      });
-    }
-
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(300).send({
@@ -51,9 +44,7 @@ exports.registerController = async (req, res) => {
     const user = await new User({
       name,
       email,
-      shipping,
       role,
-      answer,
       phone,
       address,
       password: hashedPassword,
@@ -138,13 +129,13 @@ exports.getAllUsers = async (req, res) => {
 
 exports.findUser = async (req, res) => {
   try {
-    const {id} = req.params;
+    const { id } = req.params;
     const user = await User.findById(id);
     res.status(200).send({
-      success:true,
-      message:"Fetched User Successfully",
-      user
-    })
+      success: true,
+      message: "Fetched User Successfully",
+      user,
+    });
   } catch (error) {
     res.status(500).send({
       success: false,

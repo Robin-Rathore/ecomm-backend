@@ -25,21 +25,10 @@ const userSchema = new mongoose.Schema({
         type:Number,
         required:true
     },
-    answer:{
-        type:String,
-        required:true
-    },
-    shipping:{
-        type:Number,
-    },
     cart:{
         type:[],
         default:[]
     },
-    orders:{
-        type:[],
-        default:[]
-    }
 },{timestamps:true})
 
 exports.User =  mongoose.model("User",userSchema);
