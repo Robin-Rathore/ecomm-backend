@@ -34,29 +34,29 @@ app.use("/api/v1/order", orderRouter.router);
 
 
 // This is your test secret API key.
-const stripe = require("stripe")(process.env.STRIPE_KEY);
+// const stripe = require("stripe")(process.env.STRIPE_KEY);
 
-app.post("/api/v1/create-checkout-session",async(req,res)=>{
-  const {price,cart} = req.body;
-  const lineItems = cart.map((c)=>({
-    price_data:{
-      currency:"usd",
-      product_data:{
-        name:c.name,
-      },
-      unit_amount:parseInt(c.price) ,
-    },
-    quantity:c.quantity
-  }))
-  const session =await stripe.checkout.sessions.create({
-    payment_method_types:["card"],
-    line_items:lineItems,
-    mode:"payment",
-    success_url:"http://localhost:3000/",
-    cancel_url:"http://localhost:3000/cart",
-  })
-  res.json({id:session.id})
-})
+// app.post("/api/v1/create-checkout-session",async(req,res)=>{
+//   const {price,cart} = req.body;
+//   const lineItems = cart.map((c)=>({
+//     price_data:{
+//       currency:"usd",
+//       product_data:{
+//         name:c.name,
+//       },
+//       unit_amount:parseInt(c.price) ,
+//     },
+//     quantity:c.quantity
+//   }))
+//   const session =await stripe.checkout.sessions.create({
+//     payment_method_types:["card"],
+//     line_items:lineItems,
+//     mode:"payment",
+//     success_url:"http://localhost:3000/",
+//     cancel_url:"http://localhost:3000/cart",
+//   })
+//   res.json({id:session.id})
+// })
 
 
 app.listen(process.env.PORT, () => {

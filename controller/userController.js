@@ -6,7 +6,7 @@ const { updateProduct } = require("./productController");
 const { Order } = require("../model/orderModel");
 exports.registerController = async (req, res) => {
   try {
-    const { email, name, password, address, phone, role } = req.body;
+    const { name,email, password, address, phone, role } = req.body;
     if (!email) {
       return res.send({
         message: "Enter Email",

@@ -17,18 +17,18 @@ const userSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    role:{
-        type:Number,
-        default:0,
-    },
     phone:{
         type:Number,
         required:true
     },
-    cart:{
-        type:[],
-        default:[]
+    role:{
+        type:Number,
+        default:0,
     },
+    // cart:{
+    //     type:[],
+    //     default:[]
+    // },
 },{timestamps:true})
 
 exports.User =  mongoose.model("User",userSchema);
